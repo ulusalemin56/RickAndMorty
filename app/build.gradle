@@ -78,4 +78,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
+
+    // SmoothBottomBar
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
 }

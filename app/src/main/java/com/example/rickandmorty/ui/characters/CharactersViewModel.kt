@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.home
+package com.example.rickandmorty.ui.characters
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class CharactersViewModel @Inject constructor(
     private val homeRepository: HomeRepository
 ): BaseViewModel() {
     val allCharactersLiveData = MutableLiveData<CharacterResponse>()
