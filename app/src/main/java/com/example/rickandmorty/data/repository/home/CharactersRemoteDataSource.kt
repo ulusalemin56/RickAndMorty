@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class HomeRemoteDataSource @Inject constructor(
+class CharactersRemoteDataSource @Inject constructor(
     private val rickAndMortyService: RickAndMortyService
-) : HomeDataSource {
+) : CharactersDataSource {
     override fun getAllCharacters(): Flow<Resource<CharacterResponse>> = flow {
         try {
             emit(Resource.Loading())

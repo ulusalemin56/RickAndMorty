@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.data.model.character.CharacterResponse
-import com.example.rickandmorty.data.repository.home.HomeRepository
+import com.example.rickandmorty.data.repository.home.CharactersRepository
 import com.example.rickandmorty.ui.base.BaseViewModel
 import com.example.rickandmorty.util.constants.ResourceStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val charactersRepository: CharactersRepository
 ): BaseViewModel() {
     val allCharactersLiveData = MutableLiveData<CharacterResponse>()
 
@@ -22,7 +22,7 @@ class CharactersViewModel @Inject constructor(
     }
 
     private fun getAllCharacters() = viewModelScope.launch {
-        homeRepository.getAllCharacters()
+        charactersRepository.getAllCharacters()
             .asLiveData(viewModelScope.coroutineContext).observeForever {
                 when (it.status) {
                     ResourceStatus.LOADING -> {

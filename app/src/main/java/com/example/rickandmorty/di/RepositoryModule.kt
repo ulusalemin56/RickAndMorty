@@ -1,7 +1,7 @@
 package com.example.rickandmorty.di
 
-import com.example.rickandmorty.data.repository.home.HomeDataSource
-import com.example.rickandmorty.data.repository.home.HomeRepository
+import com.example.rickandmorty.data.repository.home.CharactersDataSource
+import com.example.rickandmorty.data.repository.home.CharactersRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,8 +12,8 @@ import dagger.hilt.android.components.ViewModelComponent
 object RepositoryModule {
     @Provides
     fun provideHomeRepository(
-        dataSource: HomeDataSource
-    ) : HomeRepository {
-        return HomeRepository(dataSource)
+        dataSource: CharactersDataSource
+    ) : CharactersRepository {
+        return CharactersRepository(dataSource)
     }
 }
