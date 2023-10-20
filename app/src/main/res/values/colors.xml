@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_bottom_navigation">#BA000000</color>
+    <color name="blue_800">#039BE5</color>
+    <color name="yellow_800">#FDD835</color>
+    <color name="grey_800">#626262</color>
+
+    <color name="not_focus_search_icon">#FFFFFFFF</color>
+    <color name="focus_search_icon">#039BE5</color>
+
+    <color name="not_focus_search_tint_text">#FFFFFFFF</color>
+    <color name="focus_search_tint_text">#FF000000</color>
+    <color name="search_text_color">#FF000000</color>
+
 </resources>
