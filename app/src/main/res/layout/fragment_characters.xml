@@ -7,7 +7,6 @@
     android:background="@drawable/background_character_fragment"
     tools:context=".ui.characters.CharactersFragment">
 
-
     <ImageView
         android:id="@+id/titleRickAndMortyImageView"
         android:layout_width="match_parent"
@@ -27,17 +26,88 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:drawablePadding="5dp"
         android:background="@drawable/search_box_background"
         android:drawableStart="@drawable/search_icon"
+        android:drawablePadding="5dp"
         android:hint="@string/search_character"
-        android:maxLines="1"
         android:inputType="textFilter"
+        android:maxLines="1"
         android:textColor="@color/search_text_color"
         android:textColorHint="@color/not_focus_search_tint_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleRickAndMortyImageView" />
+
+    <RadioGroup
+        android:id="@+id/filterRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintTop_toBottomOf="@id/searchBarEditText">
+
+        <RadioButton
+            android:id="@+id/allRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_background"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/all"
+            android:textColor="@drawable/radio_button_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/aliveRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_background"
+            android:button="@android:color/transparent"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/alive"
+            android:textColor="@drawable/radio_button_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/deadRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_background"
+            android:button="@android:color/transparent"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/dead"
+            android:textColor="@drawable/radio_button_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/unknownRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_background"
+            android:button="@android:color/transparent"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/unknown"
+            android:textColor="@drawable/radio_button_text_color"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,17 +2,17 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="true" android:state_focused="true">
         <shape>
-            <stroke android:width="3dp" android:color="@color/blue_800" />
+            <stroke android:width="3dp" android:color="@color/focus_search_box_stroke" />
             <corners android:radius="15dp" />
-            <solid android:color="@color/yellow_800" />
+            <solid android:color="@color/focus_search_box_background" />
             <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
         </shape>
     </item>
     <item android:state_enabled="true">
         <shape>
-            <stroke android:width="3dp" android:color="@color/white" />
+            <stroke android:width="3dp" android:color="@color/not_focus_search_box_stroke" />
             <corners android:radius="15dp" />
-            <solid android:color="@color/grey_800" />
+            <solid android:color="@color/not_focus_search_box_background" />
             <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
         </shape>
     </item>

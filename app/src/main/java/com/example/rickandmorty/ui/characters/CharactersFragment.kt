@@ -23,12 +23,27 @@ class CharactersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
-
         whenFocusBehaviorOfSearchBox()
-
-
         observeViewModel()
         return binding.root
+    }
+    private fun observeViewModel() {
+        with(viewModel) {
+            allCharactersLiveData.observe(viewLifecycleOwner) { userResponse ->
+                userResponse.results?.forEach { result ->
+                    Log.e("HomeFragment", result?.name!!)
+                }
+            }
+
+            error.observe(viewLifecycleOwner) {
+                it.run {
+
+                }
+            }
+            loading.observe(viewLifecycleOwner) {
+
+            }
+        }
     }
 
     private fun whenFocusBehaviorOfSearchBox() {
@@ -55,7 +70,6 @@ class CharactersFragment : Fragment() {
             }
         }
     }
-
     private fun setBehaviourIconOfSearchBox(searchView: EditText, color: Int) {
         val drawableSearchIcon = requireActivity().applicationContext.getDrawableEx(R.drawable.search_icon)
         drawableSearchIcon?.setTint(
@@ -65,28 +79,7 @@ class CharactersFragment : Fragment() {
             drawableSearchIcon, null, null, null,
         )
     }
-
     private fun setBehaviourColorHintTextOfSearchBox(searchView: EditText, color: Int) {
         searchView.setHintTextColor(requireActivity().applicationContext.getColoreEx(color))
     }
-
-    private fun observeViewModel() {
-        with(viewModel) {
-            allCharactersLiveData.observe(viewLifecycleOwner) { userResponse ->
-                userResponse.results?.forEach { result ->
-                    Log.e("HomeFragment", result?.name!!)
-                }
-            }
-
-            error.observe(viewLifecycleOwner) {
-                it.run {
-
-                }
-            }
-            loading.observe(viewLifecycleOwner) {
-
-            }
-        }
-    }
-
 }

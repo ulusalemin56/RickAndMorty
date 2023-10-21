@@ -5,4 +5,8 @@
     <string name="locations">Locations</string>
     <string name="episodes">Episodes</string>
     <string name="search_character">Search Character</string>
+    <string name="all">All</string>
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="unknown">Unknown</string>
 </resources>
