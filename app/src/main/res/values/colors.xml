@@ -8,20 +8,24 @@
     <color name="indicator_color_bottom_navigation">#626262</color>
     <color name="text_color_bottom_navigation">#FDD835</color>
 
-    <color name="focus_search_box_background">#B0FDD835</color>
+    <color name="focus_search_box_background">#FDD835</color>
     <color name="not_focus_search_box_background">#A3626262</color>
 
-    <color name="focus_search_box_stroke">#039BE5</color>
+    <color name="focus_search_box_stroke">#00b0c8</color>
     <color name="not_focus_search_box_stroke">#FFFFFFFF</color>
 
     <color name="not_focus_search_icon">#FFFFFFFF</color>
-    <color name="focus_search_icon">#039BE5</color>
+    <color name="focus_search_icon">#00b0c8</color>
 
     <color name="not_focus_search_tint_text">#FFFFFFFF</color>
     <color name="focus_search_tint_text">#FF000000</color>
     <color name="search_text_color">#FF000000</color>
 
-    <color name="checked_radio_button_background">#B0FDD835</color>
+    <color name="checked_radio_button_background">#FDD835</color>
     <color name="not_checked_radio_button_background">#CE626262</color>
+
+    <color name="item_character_title">#00b0c8</color>
+
+    <color name="item_character_background_shape">#0071C8</color>
 
 </resources>
