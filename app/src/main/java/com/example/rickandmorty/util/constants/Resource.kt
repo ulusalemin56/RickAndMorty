@@ -1,21 +1,7 @@
 package com.example.rickandmorty.util.constants
 
-sealed class Resource<T>(
-    val data: T?,
-    val throwable: Throwable?,
-    val status: ResourceStatus
-) {
-    class Loading<T> :
-        Resource<T>(
-            null, null,
-            ResourceStatus.LOADING
-        )
-
-    class Success<T>(data: T?) :
-        Resource<T>(
-            data, null,
-            ResourceStatus.SUCCESS
-        )
-
-    class Error<T>(exception: Exception) : Resource<T>(null, exception, ResourceStatus.ERROR)
+sealed class Resource<out T : Any> {
+    object Loading : Resource<Nothing>()
+    data class Success<out T : Any>(val data : T) : Resource<T>()
+    data class Error(val throwable: Throwable) : Resource<Nothing>()
 }

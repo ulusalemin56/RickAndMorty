@@ -1,18 +1,22 @@
 package com.example.rickandmorty.ui.characters
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.FragmentCharactersBinding
+import com.example.rickandmorty.util.constants.Resource
 import com.example.rickandmorty.util.extension.getColoreEx
 import com.example.rickandmorty.util.extension.getDrawableEx
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
@@ -24,24 +28,31 @@ class CharactersFragment : Fragment() {
     ): View {
         binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
         whenFocusBehaviorOfSearchBox()
-        observeViewModel()
+        collectViewModel()
         return binding.root
     }
-    private fun observeViewModel() {
-        with(viewModel) {
-            allCharactersLiveData.observe(viewLifecycleOwner) { userResponse ->
-                userResponse.results?.forEach { result ->
-                    Log.e("HomeFragment", result?.name!!)
+
+    private fun collectViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                with(viewModel) {
+                    allCharacters.collect{resource ->
+                        when(resource) {
+                            is Resource.Loading -> {
+
+                            }
+                            is Resource.Success -> {
+                                resource.data.results?.let {
+                                    val adapter = CharactersAdapter(it)
+                                    binding.charactersRecyclerView.adapter = adapter
+                                }
+                            }
+                            is Resource.Error -> {
+
+                            }
+                        }
+                    }
                 }
-            }
-
-            error.observe(viewLifecycleOwner) {
-                it.run {
-
-                }
-            }
-            loading.observe(viewLifecycleOwner) {
-
             }
         }
     }
@@ -70,8 +81,10 @@ class CharactersFragment : Fragment() {
             }
         }
     }
+
     private fun setBehaviourIconOfSearchBox(searchView: EditText, color: Int) {
-        val drawableSearchIcon = requireActivity().applicationContext.getDrawableEx(R.drawable.search_icon)
+        val drawableSearchIcon =
+            requireActivity().applicationContext.getDrawableEx(R.drawable.search_icon)
         drawableSearchIcon?.setTint(
             requireActivity().applicationContext.getColoreEx(color)
         )
@@ -79,6 +92,7 @@ class CharactersFragment : Fragment() {
             drawableSearchIcon, null, null, null,
         )
     }
+
     private fun setBehaviourColorHintTextOfSearchBox(searchView: EditText, color: Int) {
         searchView.setHintTextColor(requireActivity().applicationContext.getColoreEx(color))
     }

@@ -12,7 +12,7 @@ class CharactersRemoteDataSource @Inject constructor(
 ) : CharactersDataSource {
     override fun getAllCharacters(): Flow<Resource<CharacterResponse>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading)
             val data = rickAndMortyService.getCharacter()
             emit(Resource.Success(data = data))
         } catch (e : Exception) {
