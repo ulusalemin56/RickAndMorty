@@ -7,51 +7,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.FragmentCharactersBinding
-import com.example.rickandmorty.util.constants.Resource
 import com.example.rickandmorty.util.extension.getColoreEx
 import com.example.rickandmorty.util.extension.getDrawableEx
+import com.example.rickandmorty.util.extension.lifecycleScopeLaunchForFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
     private lateinit var binding: FragmentCharactersBinding
     private val viewModel: CharactersViewModel by viewModels()
+    private val charactersAdapter: CharactersAdapter by lazy { CharactersAdapter() }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
         whenFocusBehaviorOfSearchBox()
-        collectViewModel()
+        initCollect()
         return binding.root
     }
 
-    private fun collectViewModel() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                with(viewModel) {
-                    allCharacters.collect{resource ->
-                        when(resource) {
-                            is Resource.Loading -> {
-
-                            }
-                            is Resource.Success -> {
-                                resource.data.results?.let {
-                                    val adapter = CharactersAdapter(it)
-                                    binding.charactersRecyclerView.adapter = adapter
-                                }
-                            }
-                            is Resource.Error -> {
-
-                            }
-                        }
-                    }
+    private fun initCollect() {
+        viewLifecycleOwner.lifecycleScopeLaunchForFragment {
+            with(binding) {
+                viewModel.allCharacters.collect { pagingData ->
+                    charactersRecyclerView.adapter = charactersAdapter
+                    charactersAdapter.submitData(pagingData)
                 }
             }
         }

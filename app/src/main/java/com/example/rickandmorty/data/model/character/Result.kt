@@ -11,7 +11,7 @@ data class Result(
     @SerializedName("gender")
     val gender: String?,
     @SerializedName("id")
-    val id: Int?,
+    val id: Int,
     @SerializedName("image")
     val image: String?,
     @SerializedName("location")

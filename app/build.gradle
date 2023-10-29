@@ -81,4 +81,7 @@ dependencies {
 
     // SmoothBottomBar
     implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+
+    // Paging 3
+    implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
 }
