@@ -5,5 +5,5 @@ import com.example.rickandmorty.domain.model.CharacterItemUI
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    suspend fun getAllCharacters(): Flow<PagingData<CharacterItemUI>>
+    suspend fun getAllCharacters(query: String?, status: String?): Flow<PagingData<CharacterItemUI>>
 }

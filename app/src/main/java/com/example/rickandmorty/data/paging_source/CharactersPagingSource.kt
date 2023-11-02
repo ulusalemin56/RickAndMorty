@@ -7,12 +7,14 @@ import com.example.rickandmorty.util.constants.Constant.STARTING_PAGE_INDEX
 import com.example.rickandmorty.util.network.RickAndMortyService
 
 class CharactersPagingSource(
-    private val rickAndMortyService: RickAndMortyService
+    private val rickAndMortyService: RickAndMortyService,
+    private val query: String?,
+    private val status: String?
 ) : PagingSource<Int, Result>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
             val page = params.key ?: STARTING_PAGE_INDEX
-            val response = rickAndMortyService.getCharacter(page = page).results
+            val response = rickAndMortyService.getCharacter(page = page, query, status).results
             LoadResult.Page(
                 data = response,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page.minus(1),

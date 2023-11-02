@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    val getAllCharactersUseCase: GetAllCharactersUseCase
+    private val getAllCharactersUseCase: GetAllCharactersUseCase
 ): ViewModel() {
     private val _allCharacters = MutableStateFlow<PagingData<CharacterItemUI>>(PagingData.empty())
     val allCharacters : StateFlow<PagingData<CharacterItemUI>>
@@ -22,9 +22,9 @@ class CharactersViewModel @Inject constructor(
     init {
         getAllCharacters()
     }
-    private fun getAllCharacters() = viewModelScope.launch {
-        getAllCharactersUseCase().cachedIn(viewModelScope).collect {
-           _allCharacters.emit(it)
+    fun getAllCharacters(query: String? = null, status: String? = null) = viewModelScope.launch {
+        getAllCharactersUseCase(query, status).cachedIn(viewModelScope).collect {
+            _allCharacters.emit(it)
         }
     }
 }

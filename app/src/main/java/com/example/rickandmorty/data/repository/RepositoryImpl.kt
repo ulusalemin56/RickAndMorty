@@ -13,8 +13,8 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
     private val remoteDataSource: DataSource.Remote
 ) : Repository {
-    override suspend fun getAllCharacters(): Flow<PagingData<CharacterItemUI>> {
-        return remoteDataSource.getAllCharacters().map { pagingData ->
+    override suspend fun getAllCharacters(query: String?, status: String?): Flow<PagingData<CharacterItemUI>> {
+        return remoteDataSource.getAllCharacters(query, status).map { pagingData ->
             pagingData.map {
                 it.toCaharacterItemUI()
             }

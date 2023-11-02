@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface DataSource {
 
     interface Remote {
-        fun getAllCharacters(): Flow<PagingData<Result>>
+        fun getAllCharacters(query: String?, status: String?): Flow<PagingData<Result>>
     }
 }

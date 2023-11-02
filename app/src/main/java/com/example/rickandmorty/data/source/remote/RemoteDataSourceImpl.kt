@@ -14,11 +14,11 @@ import javax.inject.Inject
 class RemoteDataSourceImpl @Inject constructor(
     private val rickAndMortyService: RickAndMortyService
 ) : DataSource.Remote {
-    override fun getAllCharacters(): Flow<PagingData<Result>> {
+    override fun getAllCharacters(query: String?, status: String?): Flow<PagingData<Result>> {
         return Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE),
             pagingSourceFactory = {
-                CharactersPagingSource(rickAndMortyService)
+                CharactersPagingSource(rickAndMortyService, query, status)
             }
         ).flow
     }
