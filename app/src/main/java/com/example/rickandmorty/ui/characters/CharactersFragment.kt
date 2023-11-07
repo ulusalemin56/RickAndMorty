@@ -38,23 +38,21 @@ class CharactersFragment : Fragment() {
             }
 
             filterRadioGroup.setOnCheckedChangeListener { _, checkedID ->
-                with(viewModel) {
-                    when (checkedID) {
-                        R.id.allRadioButton -> {
-                            characterTypeEnum = CharacterTypeEnum.ALL
-                        }
+                when (checkedID) {
+                    R.id.allRadioButton -> {
+                        characterTypeEnum = CharacterTypeEnum.ALL
+                    }
 
-                        R.id.aliveRadioButton -> {
-                            characterTypeEnum = CharacterTypeEnum.ALIVE
-                        }
+                    R.id.aliveRadioButton -> {
+                        characterTypeEnum = CharacterTypeEnum.ALIVE
+                    }
 
-                        R.id.deadRadioButton -> {
-                            characterTypeEnum = CharacterTypeEnum.DEAD
-                        }
+                    R.id.deadRadioButton -> {
+                        characterTypeEnum = CharacterTypeEnum.DEAD
+                    }
 
-                        R.id.unknownRadioButton -> {
-                            characterTypeEnum = CharacterTypeEnum.UNKNOWN
-                        }
+                    R.id.unknownRadioButton -> {
+                        characterTypeEnum = CharacterTypeEnum.UNKNOWN
                     }
                 }
 
@@ -62,7 +60,7 @@ class CharactersFragment : Fragment() {
                 getSearchData(query, characterTypeEnum.status)
             }
 
-            searchBarEditText.addTextChangedListener {editable ->
+            searchBarEditText.addTextChangedListener { editable ->
                 editable?.let {
                     getSearchData(it.toString(), characterTypeEnum.status)
                 }
