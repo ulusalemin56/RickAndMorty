@@ -1,6 +1,6 @@
 package com.example.rickandmorty.util.network
 
-import com.example.rickandmorty.data.model.character.CharacterResponse
+import com.example.rickandmorty.data.model.remote.character.CharacterResponse
 import com.example.rickandmorty.util.constants.Constant
 import retrofit2.http.GET
 import retrofit2.http.Query

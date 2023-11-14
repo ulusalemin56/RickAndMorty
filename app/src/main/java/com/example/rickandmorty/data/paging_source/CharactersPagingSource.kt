@@ -2,7 +2,7 @@ package com.example.rickandmorty.data.paging_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmorty.data.model.character.Result
+import com.example.rickandmorty.data.model.remote.character.Result
 import com.example.rickandmorty.util.constants.Constant.STARTING_PAGE_INDEX
 import com.example.rickandmorty.util.network.RickAndMortyService
 

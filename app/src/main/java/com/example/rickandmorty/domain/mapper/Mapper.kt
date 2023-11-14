@@ -1,6 +1,6 @@
 package com.example.rickandmorty.domain.mapper
 
-import com.example.rickandmorty.data.model.character.Result
+import com.example.rickandmorty.data.model.remote.character.Result
 import com.example.rickandmorty.domain.model.CharacterItemUI
 
 fun Result.toCaharacterItemUI() = CharacterItemUI(
