@@ -28,4 +28,9 @@
 
     <color name="item_character_background_shape">#0071C8</color>
 
+    <color name="checked_favori_icon_background">#FDD835</color>
+    <color name="checked_favori_icon_stroke_color">#FFFFFFFF</color>
+    <color name="unchecked_favori_icon_stroke_color">#0071C8</color>
+
+
 </resources>

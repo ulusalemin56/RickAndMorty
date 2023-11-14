@@ -55,17 +55,18 @@
         android:textColor="@color/item_character_title"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/lineView"
+        app:layout_constraintEnd_toStartOf="@id/favoriIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/characterImageCardView"
         tools:text="Dead" />
 
-    <View
-        android:id="@+id/lineView"
-        android:layout_width="2dp"
-        android:layout_height="0dp"
-        android:layout_marginVertical="6dp"
-        android:background="@color/item_character_background_shape"
+    <CheckBox
+        android:id="@+id/favoriIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:button="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:background="@drawable/favori_icon_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +84,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/lineView"
+        app:layout_constraintStart_toEndOf="@id/favoriIcon"
         app:layout_constraintTop_toBottomOf="@id/characterImageCardView"
         tools:text="Human" />
 
