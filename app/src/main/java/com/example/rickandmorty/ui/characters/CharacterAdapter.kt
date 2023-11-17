@@ -10,7 +10,8 @@ import com.example.rickandmorty.databinding.ItemCharacterBinding
 import com.example.rickandmorty.domain.model.CharacterItemUI
 
 class CharactersAdapter(
-
+    private val insertCharacterToFavorites: (CharacterItemUI) -> Unit,
+    private val deleteCharacterFromFavorites: (CharacterItemUI) -> Unit
 ) : PagingDataAdapter<CharacterItemUI, CharactersAdapter.CharactersViewHolder>(Comparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -22,18 +23,30 @@ class CharactersAdapter(
     }
 
     override fun onBindViewHolder(holder: CharactersAdapter.CharactersViewHolder, position: Int) {
-       getItem(position)?.let {
-           holder.bind(it)
-       }
+        getItem(position)?.let {
+            holder.bind(it)
+        }
     }
 
-    inner class CharactersViewHolder(private val binding: ItemCharacterBinding) : ViewHolder(binding.root) {
+
+    inner class CharactersViewHolder(private val binding: ItemCharacterBinding) :
+        ViewHolder(binding.root) {
         fun bind(characterItem: CharacterItemUI) {
             with(binding) {
                 titleOfCharacter.text = characterItem.name
                 statusOfCharacter.text = characterItem.status
                 speciesOfCharacter.text = characterItem.species
                 Glide.with(characterImage.context).load(characterItem.image).into(characterImage)
+                favoriIcon.isChecked = characterItem.isFavorites
+                favoriIcon.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        characterItem.isFavorites = true
+                        insertCharacterToFavorites(characterItem)
+                    } else {
+                        characterItem.isFavorites = false
+                        deleteCharacterFromFavorites(characterItem)
+                    }
+                }
             }
         }
     }

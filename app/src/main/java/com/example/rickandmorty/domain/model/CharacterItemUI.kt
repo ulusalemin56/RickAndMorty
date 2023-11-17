@@ -10,4 +10,5 @@ data class CharacterItemUI(
     val image : String?,
     val originName : String?,
     val locationName : String?,
+    var isFavorites : Boolean = false
 )

@@ -9,6 +9,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.FragmentCharactersBinding
+import com.example.rickandmorty.domain.model.CharacterItemUI
 import com.example.rickandmorty.util.enums.CharacterTypeEnum
 import com.example.rickandmorty.util.extension.lifecycleScopeLaunchForFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class CharactersFragment : Fragment() {
     private lateinit var binding: FragmentCharactersBinding
     private val viewModel: CharactersViewModel by viewModels()
-    private val charactersAdapter: CharactersAdapter by lazy { CharactersAdapter() }
+    private val charactersAdapter: CharactersAdapter by lazy {
+        CharactersAdapter(
+            ::insertCharacterToFavorites,
+            ::deleteCharacterFromFavorites
+        )
+    }
     private var characterTypeEnum = CharacterTypeEnum.ALL
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,6 +80,14 @@ class CharactersFragment : Fragment() {
         } else {
             viewModel.getAllCharacters(status = status)
         }
+    }
+
+    private fun insertCharacterToFavorites(character: CharacterItemUI) {
+        viewModel.insertCharacterToFavorites(character)
+    }
+
+    private fun deleteCharacterFromFavorites(character: CharacterItemUI) {
+        viewModel.deleteCharacterFromFavorites(character)
     }
 
     private fun initCollect() {
