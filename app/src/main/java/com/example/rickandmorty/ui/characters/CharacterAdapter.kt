@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.rickandmorty.databinding.ItemCharacterBinding
 import com.example.rickandmorty.domain.model.CharacterItemUI
+import com.example.rickandmorty.util.extension.loadImage
 
 class CharactersAdapter(
     private val insertCharacterToFavorites: (CharacterItemUI) -> Unit,
@@ -36,8 +37,7 @@ class CharactersAdapter(
                 titleOfCharacter.text = characterItem.name
                 statusOfCharacter.text = characterItem.status
                 speciesOfCharacter.text = characterItem.species
-                Glide.with(characterImage.context).load(characterItem.image).into(characterImage)
-                favoriIcon.isChecked = characterItem.isFavorites
+                characterImage.loadImage(characterItem.image)
                 favoriIcon.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
                         characterItem.isFavorites = true
@@ -47,6 +47,7 @@ class CharactersAdapter(
                         deleteCharacterFromFavorites(characterItem)
                     }
                 }
+                favoriIcon.isChecked = characterItem.isFavorites
             }
         }
     }

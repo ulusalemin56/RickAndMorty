@@ -14,4 +14,10 @@
         android:icon="@drawable/bottom_episode_icon"
         android:title="@string/episodes"
         />
+
+    <item
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/bottom_favori_icon"
+        android:title="@string/favorites"
+        />
 </menu>

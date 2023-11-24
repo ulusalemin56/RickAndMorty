@@ -1,12 +1,12 @@
 package com.example.rickandmorty.di
 
+import com.example.rickandmorty.BuildConfig
 import com.example.rickandmorty.util.constants.Constant
 import com.example.rickandmorty.util.network.RickAndMortyService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import me.ibrahimsn.lib.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
