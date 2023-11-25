@@ -2,12 +2,12 @@ package com.example.rickandmorty.domain.source
 
 import androidx.paging.PagingData
 import com.example.rickandmorty.data.model.local.FavoriteEntity
-import com.example.rickandmorty.data.model.remote.character.Result
+import com.example.rickandmorty.data.model.remote.character.ResultResponse
 import kotlinx.coroutines.flow.Flow
 
-interface DataSource {
+interface RickAndMortyDataSource {
     interface Remote {
-        fun getAllCharacters(query: String?, status: String?): Flow<PagingData<Result>>
+        fun getCharacters(query: String?, status: String?): Flow<PagingData<ResultResponse>>
     }
 
     interface Local {

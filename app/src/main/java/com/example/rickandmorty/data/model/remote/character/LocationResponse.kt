@@ -3,7 +3,7 @@ package com.example.rickandmorty.data.model.remote.character
 
 import com.google.gson.annotations.SerializedName
 
-data class Origin(
+data class LocationResponse(
     @SerializedName("name")
     val name: String?,
     @SerializedName("url")

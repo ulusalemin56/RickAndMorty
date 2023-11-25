@@ -1,4 +1,4 @@
-package com.example.rickandmorty.util.database
+package com.example.rickandmorty.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

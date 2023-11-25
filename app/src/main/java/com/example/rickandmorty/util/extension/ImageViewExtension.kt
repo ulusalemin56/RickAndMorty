@@ -8,21 +8,21 @@ import com.example.rickandmorty.R
 
 fun ImageView.loadImage(url: String?) {
     val errorPlaceHolder = R.drawable.error_character_place_holder
-    val progressColor = ContextCompat.getColor(this.context, R.color.white)
+    val progressColor = ContextCompat.getColor(this.context, R.color.black)
     val circularProgress = CircularProgressDrawable(this.context).apply {
         strokeWidth = 10f
-        centerRadius = 100f
+        centerRadius = 80f
         setColorSchemeColors(progressColor)
         start()
     }
 
-    url?.let {
+    if (url.isNullOrEmpty()) {
+        this.setImageResource(errorPlaceHolder)
+    } else {
         Glide.with(this.context)
             .load(url)
             .placeholder(circularProgress)
             .error(errorPlaceHolder)
             .into(this)
-    } ?: kotlin.run {
-        this.setImageResource(errorPlaceHolder)
     }
 }

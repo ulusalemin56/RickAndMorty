@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.domain.model.CharacterItemUI
-import com.example.rickandmorty.util.enums.CharacterTypeEnum
-import com.example.rickandmorty.util.extension.lifecycleScopeLaunchForFragment
+import com.example.rickandmorty.util.enums.CharacterType
+import com.example.rickandmorty.util.extension.lifecycleScopeLaunch
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,62 +25,61 @@ class CharactersFragment : Fragment() {
             ::deleteCharacterFromFavorites
         )
     }
-    private var characterTypeEnum = CharacterTypeEnum.ALL
+    private var characterType = CharacterType.ALL
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
-        initUI()
-        initCollect()
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUI()
+        initCollect()
+    }
     private fun initUI() {
         with(binding) {
             searchBarEditText.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
-                    binding.filterRadioGroup.visibility = View.VISIBLE
+                    binding.filterRadioGroup.isVisible = true
                 }
             }
 
             filterRadioGroup.setOnCheckedChangeListener { _, checkedID ->
                 when (checkedID) {
                     R.id.allRadioButton -> {
-                        characterTypeEnum = CharacterTypeEnum.ALL
+                        characterType = CharacterType.ALL
                     }
 
                     R.id.aliveRadioButton -> {
-                        characterTypeEnum = CharacterTypeEnum.ALIVE
+                        characterType = CharacterType.ALIVE
                     }
 
                     R.id.deadRadioButton -> {
-                        characterTypeEnum = CharacterTypeEnum.DEAD
+                        characterType = CharacterType.DEAD
                     }
 
                     R.id.unknownRadioButton -> {
-                        characterTypeEnum = CharacterTypeEnum.UNKNOWN
+                        characterType = CharacterType.UNKNOWN
                     }
                 }
 
                 val query = searchBarEditText.text.toString()
-                getSearchData(query, characterTypeEnum.status)
+                getSearchData(query, characterType.status)
             }
 
             searchBarEditText.addTextChangedListener { editable ->
                 editable?.let {
-                    getSearchData(it.toString(), characterTypeEnum.status)
+                    getSearchData(it.toString(), characterType.status)
                 }
             }
         }
     }
 
     private fun getSearchData(query: String, status: String?) {
-        if (query.isNotBlank()) {
-            viewModel.getAllCharacters(query, status)
-        } else {
-            viewModel.getAllCharacters(status = status)
-        }
+       viewModel.getCharacters(query, status)
     }
 
     private fun insertCharacterToFavorites(character: CharacterItemUI) {
@@ -91,7 +91,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun initCollect() {
-        viewLifecycleOwner.lifecycleScopeLaunchForFragment {
+        viewLifecycleOwner.lifecycleScopeLaunch {
             with(binding) {
                 viewModel.allCharacters.collect { pagingData ->
                     charactersRecyclerView.adapter = charactersAdapter

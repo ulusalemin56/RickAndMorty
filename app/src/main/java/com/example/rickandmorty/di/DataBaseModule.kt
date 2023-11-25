@@ -2,7 +2,7 @@ package com.example.rickandmorty.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.rickandmorty.util.database.RickAndMortyDB
+import com.example.rickandmorty.data.database.RickAndMortyDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

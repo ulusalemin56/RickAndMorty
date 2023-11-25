@@ -3,7 +3,7 @@ package com.example.rickandmorty.data.model.remote.character
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class ResultResponse(
     @SerializedName("created")
     val created: String?,
     @SerializedName("episode")
@@ -15,11 +15,11 @@ data class Result(
     @SerializedName("image")
     val image: String?,
     @SerializedName("location")
-    val location: Location?,
+    val locationResponse: LocationResponse?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("origin")
-    val origin: Origin?,
+    val originResponse: OriginResponse?,
     @SerializedName("species")
     val species: String?,
     @SerializedName("status")

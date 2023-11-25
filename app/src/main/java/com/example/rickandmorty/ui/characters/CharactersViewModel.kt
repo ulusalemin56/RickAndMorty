@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.rickandmorty.domain.model.CharacterItemUI
 import com.example.rickandmorty.domain.use_case.characters.DeleteCharacterFromFavoritesUseCase
-import com.example.rickandmorty.domain.use_case.characters.GetAllCharactersUseCase
+import com.example.rickandmorty.domain.use_case.characters.GetCharactersUseCase
 import com.example.rickandmorty.domain.use_case.characters.InsertCharacterToFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
-    private val getAllCharactersUseCase: GetAllCharactersUseCase,
+    private val getCharactersUseCase: GetCharactersUseCase,
     private val insertCharacterToFavoritesUseCase: InsertCharacterToFavoritesUseCase,
     private val deleteCharacterFromFavoritesUseCase: DeleteCharacterFromFavoritesUseCase
 ) : ViewModel() {
@@ -25,11 +25,12 @@ class CharactersViewModel @Inject constructor(
         get() = _allCharacters
 
     init {
-        getAllCharacters()
+        getCharacters()
     }
 
-    fun getAllCharacters(query: String? = null, status: String? = null) = viewModelScope.launch {
-        getAllCharactersUseCase(query, status).cachedIn(viewModelScope).collect {
+    fun getCharacters(query: String? = null, status: String? = null) = viewModelScope.launch {
+        val newQuery = query?.ifBlank { null }
+        getCharactersUseCase(newQuery, status).cachedIn(viewModelScope).collect {
             _allCharacters.emit(it)
         }
     }

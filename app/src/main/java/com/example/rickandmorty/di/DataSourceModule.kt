@@ -1,7 +1,7 @@
 package com.example.rickandmorty.di
 
 import com.example.rickandmorty.data.source.local.LocalDataSourceImpl
-import com.example.rickandmorty.domain.source.DataSource
+import com.example.rickandmorty.domain.source.RickAndMortyDataSource
 import com.example.rickandmorty.data.source.remote.RemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -16,11 +16,11 @@ abstract class DataSourceModule {
     @Singleton
     abstract fun provideCharactersRemoteDataSource(
         remoteDataSourceImpl: RemoteDataSourceImpl
-    ) : DataSource.Remote
+    ) : RickAndMortyDataSource.Remote
 
     @Binds
     @Singleton
     abstract fun provideLocalDataSource(
         localDataSourceImpl: LocalDataSourceImpl
-    ) : DataSource.Local
+    ) : RickAndMortyDataSource.Local
 }

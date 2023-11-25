@@ -3,7 +3,7 @@ package com.example.rickandmorty.data.model.remote.character
 
 import com.google.gson.annotations.SerializedName
 
-data class Info(
+data class InfoResponse(
     @SerializedName("count")
     val count: Int?,
     @SerializedName("next")

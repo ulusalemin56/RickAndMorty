@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
 import com.example.rickandmorty.databinding.ItemCharacterBinding
 import com.example.rickandmorty.domain.model.CharacterItemUI
 import com.example.rickandmorty.util.extension.loadImage
@@ -29,7 +28,6 @@ class CharactersAdapter(
         }
     }
 
-
     inner class CharactersViewHolder(private val binding: ItemCharacterBinding) :
         ViewHolder(binding.root) {
         fun bind(characterItem: CharacterItemUI) {
@@ -39,11 +37,10 @@ class CharactersAdapter(
                 speciesOfCharacter.text = characterItem.species
                 characterImage.loadImage(characterItem.image)
                 favoriIcon.setOnCheckedChangeListener { _, isChecked ->
+                    characterItem.isFavorites = isChecked
                     if (isChecked) {
-                        characterItem.isFavorites = true
                         insertCharacterToFavorites(characterItem)
                     } else {
-                        characterItem.isFavorites = false
                         deleteCharacterFromFavorites(characterItem)
                     }
                 }
