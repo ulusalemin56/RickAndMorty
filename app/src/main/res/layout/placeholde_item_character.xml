@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="230dp"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:layout_margin="10dp"
+    android:weightSum="2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/item_character_background">
+
+        <View
+            android:id="@+id/titleOfCharacter"
+            android:layout_width="150dp"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/characterImageCardView"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            app:cardCornerRadius="140dp"
+            app:layout_constraintBottom_toTopOf="@id/statusOfCharacter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleOfCharacter"/>
+
+        <View
+            android:id="@+id/statusOfCharacter"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favoriIcon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/characterImageCardView" />
+
+        <View
+            android:id="@+id/favoriIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/characterImageCardView" />
+
+        <View
+            android:id="@+id/speciesOfCharacter"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/favoriIcon"
+            app:layout_constraintTop_toBottomOf="@id/characterImageCardView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginStart="12dp"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/item_character_background">
+
+        <View
+            android:id="@+id/titleOfCharacter2"
+            android:layout_width="150dp"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/characterImageCardView2"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            app:cardCornerRadius="140dp"
+            app:layout_constraintBottom_toTopOf="@id/statusOfCharacter2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleOfCharacter2"/>
+
+        <View
+            android:id="@+id/statusOfCharacter2"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favoriIcon2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/characterImageCardView2" />
+
+        <View
+            android:id="@+id/favoriIcon2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/characterImageCardView2" />
+
+        <View
+            android:id="@+id/speciesOfCharacter2"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/favoriIcon2"
+            app:layout_constraintTop_toBottomOf="@id/characterImageCardView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+

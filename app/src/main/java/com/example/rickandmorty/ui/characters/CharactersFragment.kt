@@ -109,34 +109,40 @@ class CharactersFragment : Fragment() {
     }
 
     private suspend fun observeStateData() {
-        charactersAdapter.loadStateFlow.collectLatest { loadState ->
-            when (loadState.refresh) {
-                is LoadState.Loading -> {
+        with(binding) {
+            charactersAdapter.loadStateFlow.collectLatest { loadState ->
+                when (loadState.refresh) {
+                    is LoadState.Loading -> {
+                        charactersContainerShimmer.isVisible = true
+                        charactersContainerShimmer.startShimmer()
+                        charactersRecyclerView.isVisible = false
+                    }
 
-                }
+                    is LoadState.NotLoading -> {
+                        charactersContainerShimmer.stopShimmer()
+                        charactersContainerShimmer.isVisible = false
+                        charactersRecyclerView.isVisible = true
+                    }
 
-                is LoadState.NotLoading -> {
-
-                }
-
-                is LoadState.Error -> {
-                    val err = (loadState.refresh as LoadState.Error).error
-                    if (err is IOException) {
-                        val title = resources.getString(R.string.connection_error)
-                        val description = resources.getString(R.string.internet_error)
-                        requireActivity().showMotionToast(
-                            title,
-                            description,
-                            motionStyle = MotionToastStyle.ERROR
-                        )
-                    } else {
-                        val title = resources.getString(R.string.error)
-                        val description = err.localizedMessage ?: "Error"
-                        requireActivity().showMotionToast(
-                            title,
-                            description,
-                            motionStyle = MotionToastStyle.ERROR
-                        )
+                    is LoadState.Error -> {
+                        val err = (loadState.refresh as LoadState.Error).error
+                        if (err is IOException) {
+                            val title = resources.getString(R.string.connection_error)
+                            val description = resources.getString(R.string.internet_error)
+                            requireActivity().showMotionToast(
+                                title,
+                                description,
+                                motionStyle = MotionToastStyle.ERROR
+                            )
+                        } else {
+                            val title = resources.getString(R.string.error)
+                            val description = err.localizedMessage ?: "Error"
+                            requireActivity().showMotionToast(
+                                title,
+                                description,
+                                motionStyle = MotionToastStyle.ERROR
+                            )
+                        }
                     }
                 }
             }
