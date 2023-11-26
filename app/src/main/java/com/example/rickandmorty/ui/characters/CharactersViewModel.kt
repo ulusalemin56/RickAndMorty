@@ -42,4 +42,5 @@ class CharactersViewModel @Inject constructor(
     fun deleteCharacterFromFavorites(character: CharacterItemUI) = viewModelScope.launch {
         deleteCharacterFromFavoritesUseCase(character)
     }
+
 }

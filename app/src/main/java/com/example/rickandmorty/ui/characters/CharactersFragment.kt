@@ -8,12 +8,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.FragmentCharactersBinding
 import com.example.rickandmorty.domain.model.CharacterItemUI
 import com.example.rickandmorty.util.enums.CharacterType
 import com.example.rickandmorty.util.extension.lifecycleScopeLaunch
+import com.example.rickandmorty.util.extension.showMotionToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import okio.IOException
+import www.sanju.motiontoast.MotionToastStyle
 
 @AndroidEntryPoint
 class CharactersFragment : Fragment() {
@@ -39,6 +44,7 @@ class CharactersFragment : Fragment() {
         initUI()
         initCollect()
     }
+
     private fun initUI() {
         with(binding) {
             searchBarEditText.setOnFocusChangeListener { _, hasFocus ->
@@ -79,7 +85,7 @@ class CharactersFragment : Fragment() {
     }
 
     private fun getSearchData(query: String, status: String?) {
-       viewModel.getCharacters(query, status)
+        viewModel.getCharacters(query, status)
     }
 
     private fun insertCharacterToFavorites(character: CharacterItemUI) {
@@ -93,9 +99,45 @@ class CharactersFragment : Fragment() {
     private fun initCollect() {
         viewLifecycleOwner.lifecycleScopeLaunch {
             with(binding) {
-                viewModel.allCharacters.collect { pagingData ->
+                viewModel.allCharacters.collectLatest { pagingData ->
                     charactersRecyclerView.adapter = charactersAdapter
                     charactersAdapter.submitData(lifecycle, pagingData)
+                    observeStateData()
+                }
+            }
+        }
+    }
+
+    private suspend fun observeStateData() {
+        charactersAdapter.loadStateFlow.collectLatest { loadState ->
+            when (loadState.refresh) {
+                is LoadState.Loading -> {
+
+                }
+
+                is LoadState.NotLoading -> {
+
+                }
+
+                is LoadState.Error -> {
+                    val err = (loadState.refresh as LoadState.Error).error
+                    if (err is IOException) {
+                        val title = resources.getString(R.string.connection_error)
+                        val description = resources.getString(R.string.internet_error)
+                        requireActivity().showMotionToast(
+                            title,
+                            description,
+                            motionStyle = MotionToastStyle.ERROR
+                        )
+                    } else {
+                        val title = resources.getString(R.string.error)
+                        val description = err.localizedMessage ?: "Error"
+                        requireActivity().showMotionToast(
+                            title,
+                            description,
+                            motionStyle = MotionToastStyle.ERROR
+                        )
+                    }
                 }
             }
         }

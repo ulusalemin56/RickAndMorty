@@ -10,4 +10,7 @@
     <string name="dead">Dead</string>
     <string name="unknown">Unknown</string>
     <string name="favorites">Favorites</string>
+    <string name="error">ERROR</string>
+    <string name="connection_error">Connection Error!</string>
+    <string name="internet_error">Please check your internet connection!</string>
 </resources>
