@@ -7,5 +7,6 @@ object Constant {
 
     object EndPoints {
         const val CHARACTERS = "character"
+        const val ITEM_CHARACTERS = "character/{id}"
     }
 }

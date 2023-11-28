@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.characters
+package com.example.rickandmorty.ui.characters_fragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

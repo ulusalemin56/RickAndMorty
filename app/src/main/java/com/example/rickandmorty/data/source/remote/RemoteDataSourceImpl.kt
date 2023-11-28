@@ -22,4 +22,6 @@ class RemoteDataSourceImpl @Inject constructor(
             }
         ).flow
     }
+
+    override suspend fun getItemCharacter(id: Int) = rickAndMortyService.getItemCharacter(id)
 }

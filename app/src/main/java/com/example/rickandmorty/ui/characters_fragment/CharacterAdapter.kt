@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.characters
+package com.example.rickandmorty.ui.characters_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,8 @@ import com.example.rickandmorty.util.extension.loadImage
 
 class CharactersAdapter(
     private val insertCharacterToFavorites: (CharacterItemUI) -> Unit,
-    private val deleteCharacterFromFavorites: (CharacterItemUI) -> Unit
+    private val deleteCharacterFromFavorites: (CharacterItemUI) -> Unit,
+    private val charactersFragmentToDetailFragment : (Int) -> Unit
 ) : PagingDataAdapter<CharacterItemUI, CharactersAdapter.CharactersViewHolder>(Comparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,6 +37,9 @@ class CharactersAdapter(
                 statusOfCharacter.text = characterItem.status
                 speciesOfCharacter.text = characterItem.species
                 characterImage.loadImage(characterItem.image)
+                characterImage.setOnClickListener {
+                    charactersFragmentToDetailFragment(characterItem.id)
+                }
                 favoriIcon.setOnCheckedChangeListener { _, isChecked ->
                     characterItem.isFavorites = isChecked
                     if (isChecked) {

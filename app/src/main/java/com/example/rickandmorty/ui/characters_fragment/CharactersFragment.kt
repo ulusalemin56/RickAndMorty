@@ -1,4 +1,4 @@
-package com.example.rickandmorty.ui.characters
+package com.example.rickandmorty.ui.characters_fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.rickandmorty.R
 import com.example.rickandmorty.databinding.FragmentCharactersBinding
@@ -27,7 +28,8 @@ class CharactersFragment : Fragment() {
     private val charactersAdapter: CharactersAdapter by lazy {
         CharactersAdapter(
             ::insertCharacterToFavorites,
-            ::deleteCharacterFromFavorites
+            ::deleteCharacterFromFavorites,
+            ::charactersFragmentToDetailFragment
         )
     }
     private var characterType = CharacterType.ALL
@@ -35,7 +37,7 @@ class CharactersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCharactersBinding.inflate(layoutInflater, container, false)
+        binding = FragmentCharactersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -94,6 +96,11 @@ class CharactersFragment : Fragment() {
 
     private fun deleteCharacterFromFavorites(character: CharacterItemUI) {
         viewModel.deleteCharacterFromFavorites(character)
+    }
+
+    private fun charactersFragmentToDetailFragment(id : Int) {
+        val action = CharactersFragmentDirections.actionCharactersFragmentToDetailFragment(id)
+        findNavController().navigate(action)
     }
 
     private fun initCollect() {

@@ -2,6 +2,7 @@ package com.example.rickandmorty.domain.mapper
 
 import com.example.rickandmorty.data.model.local.FavoriteEntity
 import com.example.rickandmorty.data.model.remote.character.ResultResponse
+import com.example.rickandmorty.data.model.remote.item_character.ItemCharacterResponse
 import com.example.rickandmorty.domain.model.CharacterItemUI
 
 fun ResultResponse.toCaharacterItemUI(isFavorites : Boolean) = CharacterItemUI(
@@ -27,4 +28,16 @@ fun CharacterItemUI.toFavoriteEntity() = FavoriteEntity(
     image = image,
     originName = originName,
     locationName = locationName
+)
+
+fun ItemCharacterResponse.toCharacterItemUI() = CharacterItemUI(
+    id = id,
+    name = name.orEmpty(),
+    status = status.orEmpty(),
+    species = species.orEmpty(),
+    type = type.orEmpty(),
+    gender = gender.orEmpty(),
+    image = image.orEmpty(),
+    originName = originResponse?.name.orEmpty(),
+    locationName = locationResponse?.name.orEmpty()
 )

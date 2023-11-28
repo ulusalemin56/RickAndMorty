@@ -3,11 +3,14 @@ package com.example.rickandmorty.data.repository
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.rickandmorty.domain.mapper.toCaharacterItemUI
+import com.example.rickandmorty.domain.mapper.toCharacterItemUI
 import com.example.rickandmorty.domain.mapper.toFavoriteEntity
 import com.example.rickandmorty.domain.model.CharacterItemUI
 import com.example.rickandmorty.domain.repository.RickAndMortyRepository
 import com.example.rickandmorty.domain.source.RickAndMortyDataSource
+import com.example.rickandmorty.util.constants.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -32,5 +35,15 @@ class RickAndMortyRepositoryImpl @Inject constructor(
 
     override suspend fun deleteCharacterFromFavorites(character: CharacterItemUI) {
         localRickAndMortyDataSource.deleteCharacterFromFavorites(character.toFavoriteEntity())
+    }
+
+    override fun getItemCharacter(id: Int): Flow<Resource<CharacterItemUI>> = flow {
+        try {
+            emit(Resource.Loading)
+            val data = remoteRickAndMortyDataSource.getItemCharacter(id).toCharacterItemUI()
+            emit(Resource.Success(data))
+        } catch (e : Exception) {
+            emit(Resource.Error(e))
+        }
     }
 }
