@@ -86,23 +86,6 @@ class CharactersFragment : Fragment() {
         }
     }
 
-    private fun getSearchData(query: String, status: String?) {
-        viewModel.getCharacters(query, status)
-    }
-
-    private fun insertCharacterToFavorites(character: CharacterItemUI) {
-        viewModel.insertCharacterToFavorites(character)
-    }
-
-    private fun deleteCharacterFromFavorites(character: CharacterItemUI) {
-        viewModel.deleteCharacterFromFavorites(character)
-    }
-
-    private fun charactersFragmentToDetailFragment(id : Int) {
-        val action = CharactersFragmentDirections.actionCharactersFragmentToDetailFragment(id)
-        findNavController().navigate(action)
-    }
-
     private fun initCollect() {
         viewLifecycleOwner.lifecycleScopeLaunch {
             with(binding) {
@@ -120,39 +103,73 @@ class CharactersFragment : Fragment() {
             charactersAdapter.loadStateFlow.collectLatest { loadState ->
                 when (loadState.refresh) {
                     is LoadState.Loading -> {
-                        charactersContainerShimmer.isVisible = true
-                        charactersContainerShimmer.startShimmer()
-                        charactersRecyclerView.isVisible = false
+                        statusVisibleOfLoading()
                     }
 
                     is LoadState.NotLoading -> {
-                        charactersContainerShimmer.stopShimmer()
-                        charactersContainerShimmer.isVisible = false
-                        charactersRecyclerView.isVisible = true
+                        statusVisibleOfSuccess()
                     }
 
                     is LoadState.Error -> {
                         val err = (loadState.refresh as LoadState.Error).error
-                        if (err is IOException) {
-                            val title = resources.getString(R.string.connection_error)
-                            val description = resources.getString(R.string.internet_error)
-                            requireActivity().showMotionToast(
-                                title,
-                                description,
-                                motionStyle = MotionToastStyle.ERROR
-                            )
-                        } else {
-                            val title = resources.getString(R.string.error)
-                            val description = err.localizedMessage ?: "Error"
-                            requireActivity().showMotionToast(
-                                title,
-                                description,
-                                motionStyle = MotionToastStyle.ERROR
-                            )
-                        }
+                        logicOfError(err)
                     }
                 }
             }
         }
     }
+
+    private fun statusVisibleOfLoading() {
+        with(binding) {
+            charactersContainerShimmer.isVisible = true
+            charactersContainerShimmer.startShimmer()
+            charactersRecyclerView.isVisible = false
+        }
+    }
+
+    private fun statusVisibleOfSuccess() {
+        with(binding) {
+            charactersContainerShimmer.stopShimmer()
+            charactersContainerShimmer.isVisible = false
+            charactersRecyclerView.isVisible = true
+        }
+    }
+
+    private fun logicOfError(err: Throwable) {
+        if (err is IOException) {
+            val title = resources.getString(R.string.connection_error)
+            val description = resources.getString(R.string.internet_error)
+            requireActivity().showMotionToast(
+                title,
+                description,
+                motionStyle = MotionToastStyle.ERROR
+            )
+        } else {
+            val title = resources.getString(R.string.error)
+            val description = err.localizedMessage ?: "Error"
+            requireActivity().showMotionToast(
+                title,
+                description,
+                motionStyle = MotionToastStyle.ERROR
+            )
+        }
+    }
+
+    private fun getSearchData(query: String, status: String?) {
+        viewModel.getCharacters(query, status)
+    }
+
+    private fun insertCharacterToFavorites(character: CharacterItemUI) {
+        viewModel.insertCharacterToFavorites(character)
+    }
+
+    private fun deleteCharacterFromFavorites(character: CharacterItemUI) {
+        viewModel.deleteCharacterFromFavorites(character)
+    }
+
+    private fun charactersFragmentToDetailFragment(id: Int) {
+        val action = CharactersFragmentDirections.actionCharactersFragmentToDetailFragment(id)
+        findNavController().navigate(action)
+    }
+
 }

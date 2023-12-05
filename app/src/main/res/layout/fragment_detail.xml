@@ -8,6 +8,25 @@
     android:background="@drawable/item_character_background"
     tools:context=".ui.detail_fragment.DetailFragment">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/charactersContainerShimmer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginTop="6dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/placeholder_fragment_detail" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/titleOfCharacter"
         android:layout_width="0dp"
@@ -46,10 +65,11 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/subTitleLinearlayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="10dp"
         android:orientation="vertical"
         android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"

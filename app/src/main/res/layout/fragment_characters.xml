@@ -125,9 +125,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/placeholde_item_character" />
+            <include layout="@layout/placeholder_item_character" />
 
-            <include layout="@layout/placeholde_item_character" />
+            <include layout="@layout/placeholder_item_character" />
 
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
