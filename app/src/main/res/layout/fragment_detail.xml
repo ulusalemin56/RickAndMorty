@@ -26,8 +26,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/characterImageCardView"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="300dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,64 +45,120 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/statusOfCharacter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:lines="1"
-        android:textColor="@color/item_character_title"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/characterImageCardView"
-        tools:text="Dead" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="vertical"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/characterImageCardView">
 
-    <TextView
-        android:id="@+id/speciesOfCharacter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:lines="1"
-        android:textColor="@color/item_character_title"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/statusOfCharacter"
-        tools:text="Human" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/genderOfCharacter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:lines="1"
-        android:textColor="@color/item_character_title"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/speciesOfCharacter"
-        tools:text="Male" />
+            <TextView
+                android:id="@+id/titleStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="@string/status"
+                android:textColor="@color/item_character_top_title"
+                android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/locationOfCharacter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:lines="1"
-        android:textColor="@color/item_character_title"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/genderOfCharacter"
-        tools:text="Earth" />
+            <TextView
+                android:id="@+id/statusOfCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/item_character_title"
+                android:textSize="24sp"
+                tools:text="Dead" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleSpecies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="@string/species"
+                android:textColor="@color/item_character_top_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/speciesOfCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/item_character_title"
+                android:textSize="24sp"
+                tools:text="Human" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="@string/gender"
+                android:textColor="@color/item_character_top_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/genderOfCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/item_character_title"
+                android:textSize="24sp"
+                tools:text="Male" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="@string/location"
+                android:textColor="@color/item_character_top_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/locationOfCharacter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/item_character_title"
+                android:textSize="24sp"
+                tools:text="Earth" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

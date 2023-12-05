@@ -25,6 +25,7 @@
     <color name="not_checked_radio_button_background">#CE626262</color>
 
     <color name="item_character_title">#00b0c8</color>
+    <color name="item_character_top_title">#CE777676</color>
 
     <color name="item_character_background_shape">#0071C8</color>
 
